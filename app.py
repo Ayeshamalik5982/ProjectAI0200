@@ -9,7 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 
 # --------------------------------------------------
-# PAGE CONFIG & THEME (Neutral, Easy on Eyes)
+# PAGE CONFIG & THEME (Dark, Easy on Eyes)
 # --------------------------------------------------
 st.set_page_config(
     page_title="Netflix ML Dashboard",
@@ -19,11 +19,23 @@ st.set_page_config(
 st.markdown("""
 <style>
 body {
-    background-color: #f2f3f7;
-    color: #333333;
+    background-color: #2e2e2e;  /* Dark background */
+    color: #ffffff;  /* Light text */
 }
 .stApp {
-    background-color: #f2f3f7;
+    background-color: #2e2e2e;
+}
+.stButton>button {
+    background-color: #1d4ed8;
+    color: white;
+}
+.stTextInput>div>input {
+    background-color: #444444;
+    color: white;
+}
+.stSelectbox>div>div>input {
+    background-color: #444444;
+    color: white;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -170,4 +182,3 @@ prediction = model.predict(scaler.transform(input_data))
 
 result = "TV Show" if prediction[0] == 1 else "Movie"
 st.sidebar.success(f"Predicted Type: {result}")
-
