@@ -159,4 +159,15 @@ st.text(classification_report(y_test, y_pred))
 st.sidebar.header("🎯 Predict Content Type")
 
 duration = st.sidebar.number_input("Duration (minutes)", min_value=1, value=90)
-release_year = st.sidebar.number_input("Rele
+release_year = st.sidebar.number_input("Release Year", min_value=1940, value=2020)
+rating = st.sidebar.selectbox("Rating", sorted(df['rating'].unique()))
+
+rating_encoded = le.fit_transform(df[['rating']].astype(str))[:1]
+
+input_data = np.array([[release_year, rating_encoded[0], duration]])
+
+prediction = model.predict(scaler.transform(input_data))
+
+result = "TV Show" if prediction[0] == 1 else "Movie"
+st.sidebar.success(f"Predicted Type: {result}")
+
